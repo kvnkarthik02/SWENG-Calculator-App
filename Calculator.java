@@ -14,7 +14,7 @@ public class Calculator {
         int equals = 0;
         int i = 0;
         while (i < stringInput.length()) {
-            var c = stringInput.charAt(i);
+            char c = stringInput.charAt(i);
             if (Character.isDigit(c)) {
                 parsedInteger += c;
             }
@@ -26,10 +26,18 @@ public class Calculator {
                 }
                 else {
                     switch (operator) {
-                        case "+" -> equals += parsed;
-                        case "-" -> equals -= parsed;
-                        case "*" -> equals *= parsed;
-                        case "/" -> equals /= parsed;
+                        case "+" :
+                            equals += parsed;
+                            break;
+                        case "-" :
+                            equals -= parsed;
+                            break;
+                        case "*" :
+                            equals *= parsed;
+                            break;
+                        case "/" :
+                            equals /= parsed;
+                            break;
                     }
                 }
 
