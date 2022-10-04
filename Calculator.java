@@ -38,6 +38,6 @@ public class Calculator {
             }
             i++;
         }
-        System.out.println("=" + equals);
+        System.out.println("= " + equals);
     }
 }
