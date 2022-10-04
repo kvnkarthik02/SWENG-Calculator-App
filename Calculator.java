@@ -42,6 +42,7 @@
 //     }
 // }
 
+import java.util.Scanner;
 import java.util.Stack;
 public class Calculator {
 
@@ -104,9 +105,40 @@ public class Calculator {
         return prefix.reverse();
     }
 
+    public static boolean validateInput(String input){
+        char [] expression = new String(input).toCharArray();
+        Boolean bool = false;
+        int i=0;
+        while(i<expression.length){
+            if((expression[i] >='0' && expression[i]<='9') || (expression[i]=='+' || expression[i]=='-' || expression[i]=='/' || expression[i]=='*')){
+                bool = true;
+                i++;
+            }
+            else{
+                bool = false;
+                i++;
+            }
+        }
+        return bool;
+    }
+
     public static void main(String[] args){
-        String exp = "12435+34569-12345*10+50";
-        System.out.println("Infix Expression: " + exp);
-        System.out.println("Prefix Expression: " + input2Prefix(exp));
+        // String exp = "12435+34569-12345*10+50";
+        // System.out.println("Infix Expression: " + exp);
+        // System.out.println("Prefix Expression: " + input2Prefix(exp));
+
+        Scanner scannerInput = new Scanner(System.in);
+
+        System.out.println("Please enter your mathematical equation");
+        System.out.println("E.g 12435+34569-12345*10+50");
+
+        String stringInput = scannerInput.next();
+
+        if(validateInput(stringInput)){
+            System.out.println(input2Prefix(stringInput));
+        }
+        else{
+            System.out.println("Invalid Input: Input contains characters the are not valid. Valid Characters: [0-9 / (*/+-)]");
+        }
     }
 }
