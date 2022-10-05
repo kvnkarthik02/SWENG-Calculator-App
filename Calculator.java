@@ -44,6 +44,7 @@
 
 import java.util.Scanner;
 import java.util.Stack;
+
 public class Calculator {
 
     static int orderOfPrecedance(char c){
@@ -55,7 +56,7 @@ public class Calculator {
             case '/':
                 return 2;
         }
-        return -1;
+        return 0;
     }
 
     public static StringBuilder input2Prefix(String infix){
@@ -121,6 +122,38 @@ public class Calculator {
         }
         return bool;
     }
+    public static Boolean checkOperator(char c) {
+        if (c >= 48 && c <= 57)
+            return true;
+        else
+            return false;
+    }
+    static int PrefixEvaluation(String theString) {
+
+        Stack <Integer> Stack = new Stack <Integer> ();
+
+        int j = theString.length() - 1;
+        while (j >= 0) {
+
+            if (checkOperator(theString.charAt(j)))
+                Stack.push((int)(theString.charAt(j) - 48));
+
+            else {
+                int o1 = Stack.peek();
+                Stack.pop();
+                int o2 = Stack.peek();
+                Stack.pop();
+                switch (theString.charAt(j)) {
+                    case '+' -> Stack.push(o1 + o2);
+                    case '-' -> Stack.push(o1 - o2);
+                    case '*' -> Stack.push(o1 * o2);
+                    case '/' -> Stack.push(o1 / o2);
+                }
+            }
+            j--;
+        }
+        return Stack.peek();
+    }
 
     public static void main(String[] args){
         // String exp = "12435+34569-12345*10+50";
@@ -136,6 +169,9 @@ public class Calculator {
 
         if(validateInput(stringInput)){
             System.out.println(input2Prefix(stringInput));
+            StringBuilder s = input2Prefix(stringInput);
+            System.out.println(PrefixEvaluation(String.valueOf(s)));
+
         }
         else{
             System.out.println("Invalid Input: Input contains characters the are not valid. Valid Characters: [0-9 / (*/+-)]");
