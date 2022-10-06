@@ -14,15 +14,6 @@ public class Calculator {
             mathEquation.add((String) i.next());
         }
 
-        while (mathEquation.indexOf("/") != -1) {
-            int num1 = Integer.parseInt(mathEquation.get(mathEquation.indexOf("/") + 1));
-            int num2 = Integer.parseInt(mathEquation.get(mathEquation.indexOf("/") - 1));
-            int answer = num2 / num1;
-            mathEquation.set(mathEquation.indexOf("/") - 1, Integer.toString(answer));
-            mathEquation.remove(mathEquation.indexOf("/") + 1);
-            mathEquation.remove(mathEquation.indexOf("/"));
-        }
-
         while (mathEquation.indexOf("*") != -1) {
             int num1 = Integer.parseInt(mathEquation.get(mathEquation.indexOf("*") + 1));
             int num2 = Integer.parseInt(mathEquation.get(mathEquation.indexOf("*") - 1));
@@ -32,13 +23,13 @@ public class Calculator {
             mathEquation.remove(mathEquation.indexOf("*"));
         }
 
-        while (mathEquation.indexOf("+") != -1) {
-            int num1 = Integer.parseInt(mathEquation.get(mathEquation.indexOf("+") + 1));
-            int num2 = Integer.parseInt(mathEquation.get(mathEquation.indexOf("+") - 1));
-            int answer = num2 + num1;
-            mathEquation.set(mathEquation.indexOf("+") - 1, Integer.toString(answer));
-            mathEquation.remove(mathEquation.indexOf("+") + 1);
-            mathEquation.remove(mathEquation.indexOf("+"));
+        while (mathEquation.indexOf("/") != -1) {
+            int num1 = Integer.parseInt(mathEquation.get(mathEquation.indexOf("/") + 1));
+            int num2 = Integer.parseInt(mathEquation.get(mathEquation.indexOf("/") - 1));
+            int answer = num2 / num1;
+            mathEquation.set(mathEquation.indexOf("/") - 1, Integer.toString(answer));
+            mathEquation.remove(mathEquation.indexOf("/") + 1);
+            mathEquation.remove(mathEquation.indexOf("/"));
         }
 
         while (mathEquation.indexOf("-") != -1) {
@@ -50,10 +41,16 @@ public class Calculator {
             mathEquation.remove(mathEquation.indexOf("-"));
         }
 
-        
+        while (mathEquation.indexOf("+") != -1) {
+            int num1 = Integer.parseInt(mathEquation.get(mathEquation.indexOf("+") + 1));
+            int num2 = Integer.parseInt(mathEquation.get(mathEquation.indexOf("+") - 1));
+            int answer = num2 + num1;
+            mathEquation.set(mathEquation.indexOf("+") - 1, Integer.toString(answer));
+            mathEquation.remove(mathEquation.indexOf("+") + 1);
+            mathEquation.remove(mathEquation.indexOf("+"));
+        }
 
         return mathEquation;
-
     }
 
     public static boolean validateInput(String input) {
@@ -75,17 +72,22 @@ public class Calculator {
 
     public static void main(String[] args) {
 
+        boolean restart = false;
+
         try (Scanner scannerInput = new Scanner(System.in)) {
-            System.out.println("Enter expression with spaces between operand and operator: ");
-            String s = scannerInput.nextLine();
-            if (validateInput(s)) {
-                BEMDAS(s).forEach(System.out::println);
-            } else {
-                System.out.println(
-                        "Invalid Input: Input contains characters the are not valid. Valid Characters: [0-9 / (*/+-)]");
+            while (!restart) {
+
+                System.out.println("Enter expression with spaces between operand and operator: ");
+                String s = scannerInput.nextLine();
+                if (validateInput(s)) {
+                    BEMDAS(s).forEach(System.out::println);
+                    restart = !restart;
+                } else {
+                    System.out.println(
+                            "Invalid Input: Input contains characters the are not valid. Valid Characters: [0-9 / (*/+-)]");
+                    restart = false;
+                }
             }
         }
-
     }
-
 }
