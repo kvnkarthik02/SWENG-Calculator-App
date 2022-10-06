@@ -266,12 +266,12 @@ public class Calculator {
         try (Scanner scannerInput = new Scanner(System.in)) {
             System.out.println("Enter math");
             String s = scannerInput.nextLine();
-            while (validateInput(s)) {
+            if (validateInput(s)) {
                 BODMAS(s).forEach(System.out::println);
-                break;
-
+            } else {
+                System.out.println(
+                        "Invalid Input: Input contains characters the are not valid. Valid Characters: [0-9 / (*/+-)]");
             }
-            System.out.println("Try again");
         }
 
     }
