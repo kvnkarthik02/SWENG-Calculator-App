@@ -189,58 +189,24 @@ import java.util.StringTokenizer;
 
 public class Calculator {
 
-    public static ArrayList<String> BODMAS(String s) {
-        ArrayList<String> termsOfEquation = new ArrayList<>();
+    public static ArrayList<String> BEMDAS(String s) {
+        ArrayList<String> mathEquation = new ArrayList<>();
 
-        // Getting numbers and operators for the equation
         StringTokenizer st = new StringTokenizer(s, " ");
         for (Iterator<Object> i = st.asIterator(); i.hasNext();) {
-            termsOfEquation.add((String) i.next());
+            mathEquation.add((String) i.next());
         }
 
-        // BODMAS - Bracket Off Division Multiplication Addition Subtraction
-        // In this video I show only DMAS
-
-        while (termsOfEquation.indexOf("/") != -1) {
-            double num1 = Double.parseDouble(termsOfEquation.get(termsOfEquation.indexOf("/") + 1));
-            double num2 = Double.parseDouble(termsOfEquation.get(termsOfEquation.indexOf("/") - 1));
+        while (mathEquation.indexOf("/") != -1) {
+            double num1 = Double.parseDouble(mathEquation.get(mathEquation.indexOf("/") + 1));
+            double num2 = Double.parseDouble(mathEquation.get(mathEquation.indexOf("/") - 1));
             double answer = num2 / num1;
-            termsOfEquation.set(termsOfEquation.indexOf("/") - 1, Double.toString(answer));
-            termsOfEquation.remove(termsOfEquation.indexOf("/") + 1);
-            termsOfEquation.remove(termsOfEquation.indexOf("/"));
-        }
-        // Now repeat it for * + - in this order
-
-        while (termsOfEquation.indexOf("*") != -1) {
-            double num1 = Double.parseDouble(termsOfEquation.get(termsOfEquation.indexOf("*") + 1));
-            double num2 = Double.parseDouble(termsOfEquation.get(termsOfEquation.indexOf("*") - 1));
-            double answer = num2 * num1;
-            termsOfEquation.set(termsOfEquation.indexOf("*") - 1, Double.toString(answer));
-            termsOfEquation.remove(termsOfEquation.indexOf("*") + 1);
-            termsOfEquation.remove(termsOfEquation.indexOf("*"));
+            mathEquation.set(mathEquation.indexOf("/") - 1, Double.toString(answer));
+            mathEquation.remove(mathEquation.indexOf("/") + 1);
+            mathEquation.remove(mathEquation.indexOf("/"));
         }
 
-        while (termsOfEquation.indexOf("+") != -1) {
-            double num1 = Double.parseDouble(termsOfEquation.get(termsOfEquation.indexOf("+") + 1));
-            double num2 = Double.parseDouble(termsOfEquation.get(termsOfEquation.indexOf("+") - 1));
-            double answer = num2 + num1;
-
-            termsOfEquation.set(termsOfEquation.indexOf("+") - 1, Double.toString(answer));
-            termsOfEquation.remove(termsOfEquation.indexOf("+") + 1);
-            termsOfEquation.remove(termsOfEquation.indexOf("+"));
-        }
-
-        while (termsOfEquation.indexOf("-") != -1) {
-            double num1 = Double.parseDouble(termsOfEquation.get(termsOfEquation.indexOf("-") + 1));
-            double num2 = Double.parseDouble(termsOfEquation.get(termsOfEquation.indexOf("-") - 1));
-            double answer = num2 - num1;
-            termsOfEquation.set(termsOfEquation.indexOf("-") - 1, Double.toString(answer));
-            termsOfEquation.remove(termsOfEquation.indexOf("-") + 1);
-            termsOfEquation.remove(termsOfEquation.indexOf("-"));
-        }
-        return termsOfEquation;
-        // Fixing some mistake
-        // Now it work correctly
+        return mathEquation;
 
     }
 
@@ -267,7 +233,7 @@ public class Calculator {
             System.out.println("Enter math");
             String s = scannerInput.nextLine();
             if (validateInput(s)) {
-                BODMAS(s).forEach(System.out::println);
+                BEMDAS(s).forEach(System.out::println);
             } else {
                 System.out.println(
                         "Invalid Input: Input contains characters the are not valid. Valid Characters: [0-9 / (*/+-)]");
