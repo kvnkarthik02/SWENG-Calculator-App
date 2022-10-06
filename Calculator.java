@@ -79,8 +79,14 @@ public class Calculator {
 
                 System.out.println("Enter expression with spaces between operand and operator: ");
                 String s = scannerInput.nextLine();
-                if (validateInput(s)) {
-                    BEMDAS(s).forEach(System.out::println);
+                String newS = s.replace("*", " * ")
+                        .replace("+", " + ")
+                        .replace("-", " - ")
+                        .replace("/", " / ");
+
+                if (validateInput(newS)) {
+
+                    BEMDAS(newS).forEach(System.out::println);
                     restart = !restart;
                 } else {
                     System.out.println(
