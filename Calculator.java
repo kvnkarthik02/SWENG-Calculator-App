@@ -198,12 +198,21 @@ public class Calculator {
         }
 
         while (mathEquation.indexOf("/") != -1) {
-            double num1 = Double.parseDouble(mathEquation.get(mathEquation.indexOf("/") + 1));
-            double num2 = Double.parseDouble(mathEquation.get(mathEquation.indexOf("/") - 1));
-            double answer = num2 / num1;
-            mathEquation.set(mathEquation.indexOf("/") - 1, Double.toString(answer));
+            int num1 = Integer.parseInt(mathEquation.get(mathEquation.indexOf("/") + 1));
+            int num2 = Integer.parseInt(mathEquation.get(mathEquation.indexOf("/") - 1));
+            int answer = num2 / num1;
+            mathEquation.set(mathEquation.indexOf("/") - 1, Integer.toString(answer));
             mathEquation.remove(mathEquation.indexOf("/") + 1);
             mathEquation.remove(mathEquation.indexOf("/"));
+        }
+
+        while (mathEquation.indexOf("*") != -1) {
+            int num1 = Integer.parseInt(mathEquation.get(mathEquation.indexOf("*") + 1));
+            int num2 = Integer.parseInt(mathEquation.get(mathEquation.indexOf("*") - 1));
+            int answer = num2 * num1;
+            mathEquation.set(mathEquation.indexOf("*") - 1, Integer.toString(answer));
+            mathEquation.remove(mathEquation.indexOf("*") + 1);
+            mathEquation.remove(mathEquation.indexOf("*"));
         }
 
         return mathEquation;
