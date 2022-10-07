@@ -77,7 +77,7 @@ public class Calculator {
         try (Scanner scannerInput = new Scanner(System.in)) {
             while (!restart) {
 
-                System.out.println("Enter expression with spaces between operand and operator: ");
+                System.out.println("Please enter a Mathematical Equation:");
                 String s = scannerInput.nextLine();
                 String newS = s.replace("*", " * ")
                         .replace("+", " + ")
