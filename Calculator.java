@@ -1,3 +1,4 @@
+import static java.lang.Integer.parseInt;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -7,54 +8,72 @@ import java.util.StringTokenizer;
 public class Calculator {
 
     public static ArrayList<String> BEMDAS(String s) {
-        ArrayList<String> mathEquation = new ArrayList<>();
+        var mathEquation = new ArrayList<String>();
 
-        StringTokenizer st = new StringTokenizer(s, " ");
-        for (Iterator<Object> i = st.asIterator(); i.hasNext();) {
+
+        StringTokenizer theString;
+        theString = new StringTokenizer(s, " ");
+        Iterator<Object> i = theString.asIterator();
+        while (i.hasNext()) {
             mathEquation.add((String) i.next());
         }
 
-        while (mathEquation.indexOf("*") != -1) {
-            int num1 = Integer.parseInt(mathEquation.get(mathEquation.indexOf("*") + 1));
-            int num2 = Integer.parseInt(mathEquation.get(mathEquation.indexOf("*") - 1));
-            int answer = num2 * num1;
-            mathEquation.set(mathEquation.indexOf("*") - 1, Integer.toString(answer));
-            mathEquation.remove(mathEquation.indexOf("*") + 1);
-            mathEquation.remove(mathEquation.indexOf("*"));
+        if (mathEquation.contains("*")) {
+            do {
+                int theNum;
+                theNum= parseInt(mathEquation.get(mathEquation.indexOf("*") + 1));
+                int theNum2;
+                theNum2 = parseInt(mathEquation.get(mathEquation.indexOf("*") - 1));
+                int answer = theNum2 * theNum;
+                mathEquation.set(mathEquation.indexOf("*") - 1, Integer.toString(answer));
+                mathEquation.remove(mathEquation.indexOf("*") + 1);
+                mathEquation.remove("*");
+            } while (mathEquation.contains("*"));
         }
 
-        while (mathEquation.indexOf("/") != -1) {
-            int num1 = Integer.parseInt(mathEquation.get(mathEquation.indexOf("/") + 1));
-            int num2 = Integer.parseInt(mathEquation.get(mathEquation.indexOf("/") - 1));
-            int answer = num2 / num1;
-            mathEquation.set(mathEquation.indexOf("/") - 1, Integer.toString(answer));
-            mathEquation.remove(mathEquation.indexOf("/") + 1);
-            mathEquation.remove(mathEquation.indexOf("/"));
+        if (mathEquation.contains("/")) {
+            do {
+                int theNum;
+                theNum = parseInt(mathEquation.get(mathEquation.indexOf("/") + 1),10);
+                int theNum2;
+                theNum2= parseInt(mathEquation.get(mathEquation.indexOf("/") - 1));
+                int answer = theNum2 / theNum;
+                mathEquation.set(mathEquation.indexOf("/") - 1, Integer.toString(answer));
+                mathEquation.remove(mathEquation.indexOf("/") + 1);
+                mathEquation.remove("/");
+            } while (mathEquation.contains("/"));
         }
 
-        while (mathEquation.indexOf("-") != -1) {
-            int num1 = Integer.parseInt(mathEquation.get(mathEquation.indexOf("-") + 1));
-            int num2 = Integer.parseInt(mathEquation.get(mathEquation.indexOf("-") - 1));
-            int answer = num2 - num1;
-            mathEquation.set(mathEquation.indexOf("-") - 1, Integer.toString(answer));
-            mathEquation.remove(mathEquation.indexOf("-") + 1);
-            mathEquation.remove(mathEquation.indexOf("-"));
+        if (mathEquation.contains("-")) {
+            do {
+                int theNum;
+                theNum = parseInt(mathEquation.get(mathEquation.indexOf("-") + 1));
+                int theNum2;
+                theNum2= parseInt(mathEquation.get(mathEquation.indexOf("-") - 1));
+                int answer = theNum2 - theNum;
+                mathEquation.set(mathEquation.indexOf("-") - 1, Integer.toString(answer));
+                mathEquation.remove(mathEquation.indexOf("-") + 1);
+                mathEquation.remove("-");
+            } while (mathEquation.contains("-"));
         }
 
-        while (mathEquation.indexOf("+") != -1) {
-            int num1 = Integer.parseInt(mathEquation.get(mathEquation.indexOf("+") + 1));
-            int num2 = Integer.parseInt(mathEquation.get(mathEquation.indexOf("+") - 1));
-            int answer = num2 + num1;
-            mathEquation.set(mathEquation.indexOf("+") - 1, Integer.toString(answer));
-            mathEquation.remove(mathEquation.indexOf("+") + 1);
-            mathEquation.remove(mathEquation.indexOf("+"));
+        if (mathEquation.contains("+")) {
+            do {
+                int theNum;
+                theNum = parseInt(mathEquation.get(mathEquation.indexOf("+") + 1));
+                int theNum2;
+                theNum2 = parseInt(mathEquation.get(mathEquation.indexOf("+") - 1));
+                int answer = theNum2 + theNum;
+                mathEquation.set(mathEquation.indexOf("+") - 1, Integer.toString(answer));
+                mathEquation.remove(mathEquation.indexOf("+") + 1);
+                mathEquation.remove("+");
+            } while (mathEquation.contains("+"));
         }
-
         return mathEquation;
     }
 
     public static boolean validateInput(String input) {
-        char[] expression = new String(input).toCharArray();
+        char[] expression = input.toCharArray();
         Boolean bool = false;
         int i = 0;
         while (i < expression.length) {
