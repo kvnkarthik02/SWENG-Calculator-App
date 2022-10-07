@@ -1,3 +1,4 @@
+
 import static java.lang.Integer.parseInt;
 
 import java.util.ArrayList;
@@ -84,6 +85,7 @@ public class Calculator {
             } else {
                 bool = false;
                 i++;
+                return bool;
             }
         }
         return bool;
