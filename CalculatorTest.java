@@ -14,12 +14,18 @@ public class CalculatorTest {
     @Test
     public void testGivenExample(){
         assertEquals(Arrays.asList("-76396"), calc.BEMDAS("12435 + 34569 - 12345 * 10 + 50"));
+
+    
+
     }
 
     @Test
     public void testInvalidInput(){
         assertFalse(calc.validateInput("asdf"));
         assertFalse(calc.validateInput("234^33"));
+
+        assertFalse(calc.validateInput("Hi"));
+        assertFalse(calc.validateInput("1(&"));
     }
 
 }
