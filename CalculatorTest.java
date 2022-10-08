@@ -14,8 +14,8 @@ public class CalculatorTest {
     @Test
     public void testGivenExample(){
         assertEquals(Arrays.asList("-76396"), calc.BEMDAS("12435 + 34569 - 12345 * 10 + 50"));
-
-    
+        assertEquals(Arrays.asList("-15"), calc.BEMDAS("5+5*2"));
+        assertEquals(Arrays.asList("77"), calc.BEMDAS("2*4*9+5"));
 
     }
 
