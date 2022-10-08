@@ -22,7 +22,6 @@ public class Calculator {
             mathEquation.remove(mathEquation.indexOf("*") + 1);
             mathEquation.remove(mathEquation.indexOf("*"));
         }
-
         while (mathEquation.indexOf("/") != -1) {
             int num1 = Integer.parseInt(mathEquation.get(mathEquation.indexOf("/") + 1));
             int num2 = Integer.parseInt(mathEquation.get(mathEquation.indexOf("/") - 1));
@@ -87,10 +86,11 @@ public class Calculator {
                 if (validateInput(newS)) {
 
                     BEMDAS(newS).forEach(System.out::println);
+                    System.out.println("Thank you for using our Calculator.");
                     restart = !restart;
                 } else {
                     System.out.println(
-                            "Invalid Input: Input contains characters the are not valid. Valid Characters: [0-9 / (*/+-)]");
+                            "Invalid Input: Input contains characters the are not valid. Valid Characters: [0-9 / (*/+-)] ");
                     restart = false;
                 }
             }
